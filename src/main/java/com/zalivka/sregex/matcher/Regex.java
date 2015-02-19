@@ -9,6 +9,10 @@ public abstract class Regex {
         this.empty = empty;
     }
 
+    public boolean marked() {
+        return marked;
+    }
+
     public void reset() {
         marked = false;
     }
