@@ -1,8 +1,8 @@
 package com.zalivka.sregex.matcher;
 
-public class Repetition extends Unary {
-    public Repetition(Regex re) {
-        super(true, re);
+public class Few extends Unary {
+    public Few(Regex re) {
+        super(false, re);
     }
 
     @Override protected boolean doShift(char c, boolean mark) {

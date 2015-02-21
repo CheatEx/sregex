@@ -29,5 +29,7 @@ public class OptionalTest extends TestCase {
 
     public void testEmpty() {
         assertTrue(Matcher.match(OA, ""));
+        assertFalse(Matcher.match(OA_B, ""));
+        assertFalse(Matcher.match(OA_B, ""));
     }
 }
