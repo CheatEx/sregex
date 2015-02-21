@@ -8,11 +8,7 @@ public final class Matcher {
         // TODO performs full-string match. Do we need substring?
         boolean res = re.shift(str.charAt(0), true);
         for (int i = 1; i < str.length(); i++) {
-            if (res)
-                break;
-
-            char next = str.charAt(i);
-            res = re.shift(next, false);
+            res = re.shift(str.charAt(i), false);
         }
 
         re.reset();

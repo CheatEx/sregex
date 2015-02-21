@@ -6,7 +6,6 @@ public class CharTest extends TestCase {
     public void testChar() {
         assertTrue(Matcher.match(new Char('a'), "a"));
         assertFalse(Matcher.match(new Char('a'), "b"));
-
-        assertTrue(Matcher.match(new Char('a'), "abc"));
+        assertFalse(Matcher.match(new Char('a'), "ab"));
     }
 }
