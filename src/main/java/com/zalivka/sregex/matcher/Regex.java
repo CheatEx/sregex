@@ -1,8 +1,18 @@
 package com.zalivka.sregex.matcher;
 
+/**
+ * Base class for all expressions.
+ * Defines both syntax [sub]tree of a regular expression and the matching algorithm.
+ */
 public abstract class Regex {
+    /**
+     * Whether this [sub]expression could match an empty string.
+     */
     public final boolean empty;
 
+    /**
+     * Whether this sub-expression matched the input seen so far.
+     */
     private boolean marked = false;
 
     public Regex(boolean empty) {

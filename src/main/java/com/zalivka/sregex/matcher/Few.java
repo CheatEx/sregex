@@ -1,5 +1,8 @@
 package com.zalivka.sregex.matcher;
 
+/**
+ * One or more repetitions of the sub-expression.
+ */
 public class Few extends Unary {
     public Few(Regex re) {
         super(false, re);

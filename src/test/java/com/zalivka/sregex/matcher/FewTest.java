@@ -14,7 +14,9 @@ public class FewTest extends TestCase {
 
         assertFalse(Matcher.match(FA, "b"));
         assertFalse(Matcher.match(FA, "bb"));
+    }
 
+    public void testFewInSequence() {
         assertTrue(Matcher.match(FA_B, "ab"));
         assertTrue(Matcher.match(FA_B, "aab"));
         assertFalse(Matcher.match(FA_B, "a"));

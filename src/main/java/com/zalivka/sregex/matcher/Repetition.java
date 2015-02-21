@@ -1,5 +1,8 @@
 package com.zalivka.sregex.matcher;
 
+/**
+ * Any number of repetitions of the sub-expression.
+ */
 public class Repetition extends Unary {
     public Repetition(Regex re) {
         super(true, re);
