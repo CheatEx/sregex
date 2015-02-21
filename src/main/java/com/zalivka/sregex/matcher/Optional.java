@@ -15,4 +15,8 @@ public class Optional extends Unary {
         else
             return re.shift(c, mark);
     }
+
+    @Override public String toString() {
+        return re.toString()+'?';
+    }
 }

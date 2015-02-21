@@ -11,4 +11,8 @@ public class Repetition extends Unary {
     @Override protected boolean doShift(char c, boolean mark) {
         return re.shift(c, mark || marked());
     }
+
+    @Override public String toString() {
+        return re.toString()+'*';
+    }
 }

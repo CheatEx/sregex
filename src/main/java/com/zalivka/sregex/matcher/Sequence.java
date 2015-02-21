@@ -12,4 +12,8 @@ public class Sequence extends Binary {
             c, oldLeftMarked || (mark && left.empty));
         return (leftMarked && right.empty) || rightMarked;
     }
+
+    @Override public String toString() {
+        return left.toString()+right.toString();
+    }
 }

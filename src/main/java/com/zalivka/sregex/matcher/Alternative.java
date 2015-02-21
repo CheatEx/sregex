@@ -10,4 +10,8 @@ public class Alternative extends Binary {
         boolean rigthMarked = right.shift(c, mark);
         return leftMarked || rigthMarked;
     }
+
+    @Override public String toString() {
+        return left.toString()+'|'+right.toString();
+    }
 }

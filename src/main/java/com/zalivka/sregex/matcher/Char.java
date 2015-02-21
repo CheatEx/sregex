@@ -11,4 +11,8 @@ public class Char extends Regex {
     @Override protected boolean doShift(char c, boolean mark) {
         return mark && c == val;
     }
+
+    @Override public String toString() {
+        return String.valueOf(val);
+    }
 }
