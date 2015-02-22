@@ -6,6 +6,24 @@ package com.zalivka.sregex.matcher;
  */
 public abstract class Regex {
     /**
+     * The empty regex.
+     * Implemented as a singleton instance as it doesn't maintain any state.
+     */
+    public static final Regex E = new Regex(true) {
+        @Override protected boolean doShift(char c, boolean mark) {
+            return false;
+        }
+
+        @Override public String toString() {
+            return "<e>";
+        }
+
+        @Override public boolean equals(Object obj) {
+            return this == obj || !(obj == null || getClass() != obj.getClass());
+        }
+    };
+
+    /**
      * Whether this [sub]expression could match an empty string.
      */
     public final boolean empty;

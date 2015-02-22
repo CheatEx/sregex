@@ -8,9 +8,6 @@ import java.util.Deque;
 
 public final class Parser {
     public static Regex parse(String in) throws ExpressionException {
-        if (in.isEmpty())
-            return new Empty();
-
         Deque<Regex> s = new ArrayDeque<>();
         read(in, 0, s);
         return s.pop();
@@ -21,7 +18,7 @@ public final class Parser {
      */
     private static boolean read(String in, int idx, Deque<Regex> s) {
         if (idx == in.length()) {
-            s.push(new Empty());
+            s.push(Regex.E);
             return true;
         }
 
@@ -44,11 +41,19 @@ public final class Parser {
             s.push(new Alternative(left, right));
 
             return false;
+        } else if (c == '*') {
+            s.push(new Repetition(s.pop()));
+            read(in, idx+1, s);
+            return true;
+        } else if (c == '+') {
+            s.push(new Few(s.pop()));
+            read(in, idx+1, s);
+            return true;
+        } else if (c == '?') {
+            s.push(new Optional(s.pop()));
+            read(in, idx+1, s);
+            return true;
         } else
             throw new ExpressionException("not supported yet");
-    }
-
-    private static boolean isControl(char c) {
-        return c=='|' || c=='?' || c=='*' || c=='+';
     }
 }
