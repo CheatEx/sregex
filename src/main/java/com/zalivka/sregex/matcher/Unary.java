@@ -12,4 +12,15 @@ public abstract class Unary extends Regex {
         super.reset();
         re.reset();
     }
+
+    @Override public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+
+        Unary unary = (Unary)obj;
+        return re.equals(unary.re);
+
+    }
 }

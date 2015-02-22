@@ -14,6 +14,8 @@ public class SregexSuite extends TestSuite {
         s.addTestSuite(OptionalTest.class);
         s.addTestSuite(FewTest.class);
 
+        s.addTestSuite(ParserTest.class);
+
         s.addTestSuite(BasicTest.class);
 
         return s;

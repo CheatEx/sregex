@@ -15,4 +15,15 @@ public abstract class Binary extends Regex {
         right.reset();
         super.reset();
     }
+
+    @Override public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+
+        Binary binary = (Binary)obj;
+        return left.equals(binary.left) && right.equals(binary.right);
+    }
 }

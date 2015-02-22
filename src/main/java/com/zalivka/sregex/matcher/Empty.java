@@ -8,4 +8,12 @@ public class Empty extends Regex {
     @Override protected boolean doShift(char c, boolean mark) {
         return false;
     }
+
+    @Override public String toString() {
+        return "<e>";
+    }
+
+    @Override public boolean equals(Object obj) {
+        return this == obj || !(obj == null || getClass() != obj.getClass());
+    }
 }
