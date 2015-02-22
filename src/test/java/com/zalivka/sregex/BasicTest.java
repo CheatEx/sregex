@@ -4,9 +4,9 @@ import junit.framework.TestCase;
 
 public class BasicTest extends TestCase {
     public void testEmpty() {
-        assertTrue(Sregex.match("", ""));
-        assertFalse(Sregex.match("a", ""));
-        assertFalse(Sregex.match("a|b", ""));
+        assertTrue(Sregex.match("", "").succes());
+        assertFalse(Sregex.match("a", "").succes());
+        assertFalse(Sregex.match("a|b", "").succes());
 //        assertFalse(Sregex.match("ab", ""));
     }
 
@@ -28,13 +28,13 @@ public class BasicTest extends TestCase {
     }
 
     public void testSimpleAlternation() {
-        assertTrue(Sregex.match("a|b", "a"));
-        assertTrue(Sregex.match("a|b", "b"));
-        assertFalse(Sregex.match("a|b", "c"));
+        assertTrue(Sregex.match("a|b", "a").succes());
+        assertTrue(Sregex.match("a|b", "b").succes());
+        assertFalse(Sregex.match("a|b", "c").succes());
 
-        assertTrue(Sregex.match("a|b|c", "a"));
-        assertTrue(Sregex.match("a|b|c", "b"));
-        assertTrue(Sregex.match("a|b|c", "c"));
-        assertFalse(Sregex.match("a|b|c", "d"));
+        assertTrue(Sregex.match("a|b|c", "a").succes());
+        assertTrue(Sregex.match("a|b|c", "b").succes());
+        assertTrue(Sregex.match("a|b|c", "c").succes());
+        assertFalse(Sregex.match("a|b|c", "d").succes());
     }
 }
