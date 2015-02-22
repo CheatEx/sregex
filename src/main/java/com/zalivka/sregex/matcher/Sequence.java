@@ -14,6 +14,6 @@ public class Sequence extends Binary {
     }
 
     @Override public String toString() {
-        return left.toString()+right.toString();
+        return '('+left.toString()+right.toString()+')';
     }
 }

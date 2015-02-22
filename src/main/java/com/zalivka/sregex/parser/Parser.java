@@ -30,16 +30,18 @@ public final class Parser {
             if (read(in, idx+1, s)) {
                 // Re-ordering, left child lays deeper in the stack.
                 Regex right = s.pop();
-                Regex left = s.pop();
-                s.push(new Sequence(left, right));
+                if (s.isEmpty())
+                    s.push(right);
+                else {
+                    Regex left = s.pop();
+                    s.push(new Sequence(left, right));
+                }
             }
             return true;
         } else if (c == '|') {
-            read(in, idx+1, s);
-            Regex right = s.pop();
             Regex left = s.pop();
-            s.push(new Alternative(left, right));
-
+            read(in, idx+1, s);
+            s.push(new Alternative(left, s.pop()));
             return false;
         } else if (c == '*') {
             s.push(new Repetition(s.pop()));
