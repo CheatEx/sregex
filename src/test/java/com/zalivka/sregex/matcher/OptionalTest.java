@@ -8,28 +8,28 @@ public class OptionalTest extends TestCase {
     private static final Regex A_OB = new Sequence(new Char('a'), new Optional(new Char('b')));
 
     public void testOptional() {
-        assertTrue(Matcher.match(OA, "a"));
-        assertFalse(Matcher.match(OA, "aa"));
-        assertFalse(Matcher.match(OA, "b"));
+        assertTrue(Matcher.match(OA, "a").succes());
+        assertFalse(Matcher.match(OA, "aa").succes());
+        assertFalse(Matcher.match(OA, "b").succes());
     }
 
     public void testOptionalInSequence() {
-        assertTrue(Matcher.match(OA_B, "ab"));
-        assertTrue(Matcher.match(OA_B, "b"));
-        assertFalse(Matcher.match(OA_B, "a"));
+        assertTrue(Matcher.match(OA_B, "ab").succes());
+        assertTrue(Matcher.match(OA_B, "b").succes());
+        assertFalse(Matcher.match(OA_B, "a").succes());
 
-        assertTrue(Matcher.match(A_OB, "ab"));
-        assertTrue(Matcher.match(A_OB, "a"));
-        assertFalse(Matcher.match(A_OB, "ac"));
-        assertFalse(Matcher.match(A_OB, "cb"));
+        assertTrue(Matcher.match(A_OB, "ab").succes());
+        assertTrue(Matcher.match(A_OB, "a").succes());
+        assertFalse(Matcher.match(A_OB, "ac").succes());
+        assertFalse(Matcher.match(A_OB, "cb").succes());
 
-        assertFalse(Matcher.match(A_OB, "c"));
-        assertFalse(Matcher.match(A_OB, "cc"));
+        assertFalse(Matcher.match(A_OB, "c").succes());
+        assertFalse(Matcher.match(A_OB, "cc").succes());
     }
 
     public void testEmpty() {
-        assertTrue(Matcher.match(OA, ""));
-        assertFalse(Matcher.match(OA_B, ""));
-        assertFalse(Matcher.match(OA_B, ""));
+        assertTrue(Matcher.match(OA, "").succes());
+        assertFalse(Matcher.match(OA_B, "").succes());
+        assertFalse(Matcher.match(OA_B, "").succes());
     }
 }

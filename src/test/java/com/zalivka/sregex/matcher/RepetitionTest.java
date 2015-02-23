@@ -6,14 +6,14 @@ public class RepetitionTest extends TestCase {
     private static final Repetition AA = new Repetition(new Char('a'));
 
     public void testAlternative() {
-        assertTrue(Matcher.match(AA, "a"));
-        assertTrue(Matcher.match(AA, "aa"));
-        assertTrue(Matcher.match(AA, "aaa"));
-        assertFalse(Matcher.match(AA, "ab"));
-        assertFalse(Matcher.match(AA, "ba"));
+        assertTrue(Matcher.match(AA, "a").succes());
+        assertTrue(Matcher.match(AA, "aa").succes());
+        assertTrue(Matcher.match(AA, "aaa").succes());
+        assertFalse(Matcher.match(AA, "ab").succes());
+        assertFalse(Matcher.match(AA, "ba").succes());
     }
 
     public void testEmpty() {
-        assertTrue(Matcher.match(AA, ""));
+        assertTrue(Matcher.match(AA, "").succes());
     }
 }

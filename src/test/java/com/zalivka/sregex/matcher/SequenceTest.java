@@ -7,22 +7,22 @@ public class SequenceTest extends TestCase {
     private static final Sequence ABC_SEQ = new Sequence(new Char('a'), new Sequence(new Char('b'), new Char('c')));
 
     public void testSequence() {
-        assertTrue(Matcher.match(AB_SEQ, "ab"));
-        assertFalse(Matcher.match(AB_SEQ, "abc"));
-        assertFalse(Matcher.match(AB_SEQ, "ac"));
-        assertFalse(Matcher.match(AB_SEQ, "cb"));
-        assertFalse(Matcher.match(AB_SEQ, "a"));
+        assertTrue(Matcher.match(AB_SEQ, "ab").succes());
+        assertFalse(Matcher.match(AB_SEQ, "abc").succes());
+        assertFalse(Matcher.match(AB_SEQ, "ac").succes());
+        assertFalse(Matcher.match(AB_SEQ, "cb").succes());
+        assertFalse(Matcher.match(AB_SEQ, "a").succes());
     }
 
     public void testNestedSequence() {
-        assertTrue(Matcher.match(ABC_SEQ, "abc"));
-        assertFalse(Matcher.match(ABC_SEQ, "abcd"));
-        assertFalse(Matcher.match(ABC_SEQ, "ab"));
-        assertFalse(Matcher.match(ABC_SEQ, "cd"));
+        assertTrue(Matcher.match(ABC_SEQ, "abc").succes());
+        assertFalse(Matcher.match(ABC_SEQ, "abcd").succes());
+        assertFalse(Matcher.match(ABC_SEQ, "ab").succes());
+        assertFalse(Matcher.match(ABC_SEQ, "cd").succes());
     }
 
     public void testEmpty() {
-        assertFalse(Matcher.match(AB_SEQ, ""));
-        assertFalse(Matcher.match(ABC_SEQ, ""));
+        assertFalse(Matcher.match(AB_SEQ, "").succes());
+        assertFalse(Matcher.match(ABC_SEQ, "").succes());
     }
 }
