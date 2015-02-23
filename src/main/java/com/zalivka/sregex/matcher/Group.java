@@ -8,8 +8,8 @@ public class Group extends Unary {
     }
 
     @Override protected boolean doShift(char c, boolean mark) {
-        // Remember all characters that passed through
-        // as intended for marking before match.
+        // Remember all characters that passed through before match
+        // as intended for marking.
         if (mark && !marked())
             match.append(c);
         return re.shift(c, mark);
