@@ -17,7 +17,7 @@ public class ComplexTest extends TestCase {
                     new Sequence(
                         new Sequence(
                             new Char('a'),
-                            new Char('a')),
+                            new Char('b')),
                         new Char('c')),
                     new Char('d'))),
             new Alternative(
@@ -28,6 +28,8 @@ public class ComplexTest extends TestCase {
     public void testExample() {
         assertTrue(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcd").succes());
         assertTrue(Matcher.match(ARTICLE_EXAMPLE, "abcabcabce").succes());
+        assertTrue(Matcher.match(ARTICLE_EXAMPLE, "abcdd").succes());
+        assertTrue(Matcher.match(ARTICLE_EXAMPLE, "abcde").succes());
 
         assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcdd").succes());
         assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcf").succes());

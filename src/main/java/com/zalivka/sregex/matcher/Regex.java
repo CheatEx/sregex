@@ -24,12 +24,12 @@ public abstract class Regex {
     };
 
     /**
-     * Whether this [sub]expression could match an empty string.
+     * Whether this expression could match an empty string.
      */
     public final boolean empty;
 
     /**
-     * Whether this sub-expression matched the input seen so far.
+     * Whether this expression matched the input seen so far.
      */
     private boolean marked = false;
 
@@ -45,6 +45,12 @@ public abstract class Regex {
         marked = false;
     }
 
+    /**
+     * Pushes a character through [sub]expression represented by this object.
+     * @param c Next character in matched sequence.
+     * @param mark Whether attempt to match should be made.
+     * @return Whether this character has finished the current match of the expression.
+     */
     public boolean shift(char c, boolean mark) {
         marked = doShift(c, mark);
         return marked;
