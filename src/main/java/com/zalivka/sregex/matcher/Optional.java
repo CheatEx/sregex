@@ -17,6 +17,6 @@ public class Optional extends Unary {
     }
 
     @Override public String toString() {
-        return re.toString()+'?';
+        return "Optional("+re.toString()+')';
     }
 }

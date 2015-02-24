@@ -8,6 +8,7 @@ public final class Sregex {
 //     * Tries to match a string against a regular expression pattern written
 //     * in limited subset of the language,
 //     * TODO describe the subset.
+//     * TODO move to char sequences.
 //     *
 //     * @param regex Regular expression.
 //     * @param string String to match.

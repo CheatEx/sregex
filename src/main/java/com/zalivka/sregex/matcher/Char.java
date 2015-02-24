@@ -13,7 +13,7 @@ public class Char extends Regex {
     }
 
     @Override public String toString() {
-        return String.valueOf(val);
+        return "Char('"+val+"')";
     }
 
     @Override public boolean equals(Object obj) {

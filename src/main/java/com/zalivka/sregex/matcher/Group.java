@@ -10,7 +10,7 @@ public class Group extends Unary {
      */
     private @Nullable StringBuilder matchBuf;
 
-    protected Group(Regex re) {
+    public Group(Regex re) {
         super(re.empty, re);
     }
 
@@ -46,6 +46,6 @@ public class Group extends Unary {
     }
 
     @Override public String toString() {
-        return '('+re.toString()+')';
+        return "Group("+re.toString()+')';
     }
 }

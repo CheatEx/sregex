@@ -13,6 +13,6 @@ public class Repetition extends Unary {
     }
 
     @Override public String toString() {
-        return re.toString()+'*';
+        return "Repetition("+re.toString()+')';
     }
 }

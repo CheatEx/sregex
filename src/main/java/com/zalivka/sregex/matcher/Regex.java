@@ -15,7 +15,7 @@ public abstract class Regex {
         }
 
         @Override public String toString() {
-            return "<e>";
+            return "Regex.E";
         }
 
         @Override public boolean equals(Object obj) {

@@ -3,59 +3,105 @@ package com.zalivka.sregex.parser;
 import com.zalivka.sregex.ExpressionException;
 import com.zalivka.sregex.matcher.*;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
 public final class Parser {
     public static Regex parse(String in) throws ExpressionException {
-        Deque<Regex> s = new ArrayDeque<>();
-        read(in, 0, s);
-        return s.pop();
+        Source s = new Source(in);
+        return regex(s);
     }
 
-    /**
-     * @return Whether implicit sequencing should be applied to the result of this call.
-     */
-    private static boolean read(String in, int idx, Deque<Regex> s) {
-        if (idx == in.length()) {
-            s.push(Regex.E);
-            return true;
+    private static Regex regex(Source s) {
+        Regex term = term(s);
+
+        while(s.more() && s.peek()=='|') {
+            s.drop('|');
+            Regex nextTerm = term(s);
+            term = new Alternative(term, nextTerm);
         }
 
-        char c = in.charAt(idx);
+        return term;
+    }
 
-        if (Character.isLetter(c)) {
-            s.push(new Char(c));
+    private static Regex term(Source s) {
+        Regex factor = Regex.E;
 
-            if (read(in, idx+1, s)) {
-                // Re-ordering, left child lays deeper in the stack.
-                Regex right = s.pop();
-                if (s.isEmpty())
-                    s.push(right);
-                else {
-                    Regex left = s.pop();
-                    s.push(new Sequence(left, right));
-                }
+        while (s.more() && s.peek() != ')' && s.peek() != '|') {
+            Regex nextFactor = factor(s);
+            factor = new Sequence(factor, nextFactor);
+        }
+
+        return factor;
+    }
+
+    private static Regex factor(Source s) {
+        Regex base = base(s);
+
+        fl: while (s.more()) {
+            switch (s.peek()) {
+                case '*':
+                    s.drop('*');
+                    base = new Repetition(base);
+                    break;
+                case '?':
+                    s.drop('?');
+                    base = new Optional(base);
+                    break;
+                case '+':
+                    s.drop('+');
+                    base = new Few(base);
+                    break;
+                default:
+                    break fl;
             }
-            return true;
-        } else if (c == '|') {
-            Regex left = s.pop();
-            read(in, idx+1, s);
-            s.push(new Alternative(left, s.pop()));
-            return false;
-        } else if (c == '*') {
-            s.push(new Repetition(s.pop()));
-            read(in, idx+1, s);
-            return true;
-        } else if (c == '+') {
-            s.push(new Few(s.pop()));
-            read(in, idx+1, s);
-            return true;
-        } else if (c == '?') {
-            s.push(new Optional(s.pop()));
-            read(in, idx+1, s);
-            return true;
-        } else
-            throw new ExpressionException("not supported yet");
+        }
+
+        return base;
+    }
+
+    private static Regex base(Source s) {
+        switch (s.peek()) {
+            case '(':
+                s.drop('(');
+                Regex r = new Group(regex(s));
+                s.drop(')');
+                return r;
+            // case '[': // TODO range here.
+            default:
+                char c = s.pop();
+                if (Character.isAlphabetic(c))
+                    return new Char(c);
+                else
+                    throw new ExpressionException("Unsupported character :"+c);
+        }
+    }
+
+    private static class Source {
+        private final String input;
+        private int idx;
+
+        private Source(String input) {
+            this.input = input;
+            this.idx = 0;
+        }
+
+        public char peek() {
+            return input.charAt(idx);
+        }
+
+        public char pop() {
+            char c = peek();
+            drop(c);
+            return c;
+        }
+
+        public void drop(char c) {
+            if (peek() == c)
+                idx++;
+            else
+                throw new ExpressionException("Wrong character at "+idx+" expected "+c+" but was "+peek());
+        }
+
+        boolean more() {
+            return idx < input.length();
+        }
     }
 }

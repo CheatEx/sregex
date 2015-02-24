@@ -13,6 +13,6 @@ public class Few extends Unary {
     }
 
     @Override public String toString() {
-        return re.toString()+'+';
+        return "Few("+re.toString()+')';
     }
 }
