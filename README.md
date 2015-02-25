@@ -17,16 +17,28 @@ See also the 'Supported syntax' section below.
 ## Supported syntax
 
 * Alternatives
+
         a|b
+
 * Repetition
+
         a*
+
 * Optional
+
         b?
+
 * One ore more
+
         c+
+
 * Groups
+
         (ab)|(cd)
+
 * Character ranges
+
         '[a-c]'
         '[^x-z]'.
+
 * Arbitrary quantification {n,m}, {,n} {m,}
