@@ -16,6 +16,8 @@ See also the 'Supported syntax' section below.
 
 ## Supported syntax
 
+### Overview
+
 * Alternatives. Example: `a|b`
 * Repetition. Example: `a*`
 * Optional. Example: `b?`
@@ -23,3 +25,33 @@ See also the 'Supported syntax' section below.
 * Groups. Example: `(ab)|(cd)`
 * Character ranges. Example: `[a-c]`, `[^x-z]`
 * Arbitrary quantification {n,m}, {,n} {m,}
+
+### Specification
+
+```
+<regex> ::=
+    <term> '|' <regex> |
+    <term>
+
+<term> ::=
+    <factor>*
+
+<factor> ::=
+    <base> |
+    <base> <quantifier>*
+
+<base> ::=
+    <char> |
+    <range> |
+    '(' <regex> ')'
+
+<range> ::=
+    '[' '^'? <char> '-' <char> ']'
+    where the first character should be lexicographically less or equal than the second.
+
+<quantifier> ::=
+    '*' | '?' | '+'
+
+<char> ::=
+    '1'...'Z'
+```

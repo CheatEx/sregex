@@ -64,7 +64,8 @@ public final class Parser {
                 Regex r = new Group(regex(s));
                 s.drop(')');
                 return r;
-            // case '[': // TODO range here.
+            case '[':
+                return range(s);
             default:
                 char c = s.pop();
                 if (Character.isAlphabetic(c))
@@ -72,6 +73,27 @@ public final class Parser {
                 else
                     throw new ExpressionException("Unsupported character :"+c);
         }
+    }
+
+    private static Regex range(Source s) throws ExpressionException {
+        boolean positive = true;
+        s.drop('[');
+        char from = s.pop();
+        if (from == '^') {
+            positive = false;
+            from = s.pop();
+        }
+        s.drop('-');
+        char to = s.pop();
+        s.drop(']');
+
+        if (positive && from > to)
+            throw new ExpressionException("Empty character range detected ["+from+"-"+to+"]");
+
+        if (!positive && from > to)
+            throw new ExpressionException("Unbounded negative character range detected [^"+from+"-"+to+"]");
+
+        return new CharRange(from, to, positive);
     }
 
     private static class Source {

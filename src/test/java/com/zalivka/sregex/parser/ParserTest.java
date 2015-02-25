@@ -2,7 +2,6 @@ package com.zalivka.sregex.parser;
 
 import com.zalivka.sregex.ExpressionException;
 import com.zalivka.sregex.matcher.*;
-import com.zalivka.sregex.parser.Parser;
 import junit.framework.TestCase;
 
 public class ParserTest extends TestCase {
@@ -155,6 +154,31 @@ public class ParserTest extends TestCase {
                         new Sequence(Regex.E, new Char('c')),
                         new Sequence(Regex.E, new Char('d'))))));
 
+    private static final Regex CTF =
+        new Sequence(Regex.E, new CharRange('c', 'f', true));
+    private static final Regex CTC =
+        new Sequence(Regex.E, new CharRange('c', 'c', true));
+    private static final Regex CNF =
+        new Sequence(Regex.E, new CharRange('c', 'f', false));
+    private static final Regex CNC =
+        new Sequence(Regex.E, new CharRange('c', 'c', false));
+
+    private static final Regex ATCR =
+        new Sequence(
+            Regex.E,
+            new Repetition(new CharRange('a', 'c', true)));
+    private static final Regex ATCOXTZ =
+        new Alternative(
+            new Sequence(Regex.E, new CharRange('a', 'c', true)),
+            new Sequence(Regex.E, new CharRange('x', 'z', true)));
+    private static final Regex ATCGD =
+        new Sequence(
+            new Sequence(
+                Regex.E,
+                new Group(
+                    new Sequence(Regex.E, new CharRange('a', 'c', true)))),
+            new Char('d'));
+
     public void testSimple() throws ExpressionException {
         assertEquals(Regex.E, Parser.parse(""));
         assertEquals(A, Parser.parse("a"));
@@ -199,5 +223,37 @@ public class ParserTest extends TestCase {
 
         assertEquals(AOBGCODG, Parser.parse("(a|b)(c|d)"));
         assertEquals(AOBRCODP, Parser.parse("(a|b)*(c|d)?"));
+    }
+
+    public void testSimpleRanges() throws ExpressionException {
+        assertEquals(CTF, Parser.parse("[c-f]"));
+        assertEquals(CTC, Parser.parse("[c-c]"));
+        assertEquals(CNF, Parser.parse("[^c-f]"));
+        assertEquals(CNC, Parser.parse("[^c-c]"));
+    }
+
+    public void testRangesCover() throws ExpressionException {
+        try {
+            Parser.parse("[d-c]");
+            fail("Empty range passed");
+        } catch (ExpressionException e) {}
+        try {
+            Parser.parse("[e-c]");
+            fail("Empty range passed");
+        } catch (ExpressionException e) {}
+        try {
+            Parser.parse("[^d-c]");
+            fail("Unbound range passed");
+        } catch (ExpressionException e) {}
+        try {
+            Parser.parse("[^e-c]");
+            fail("Unbound range passed");
+        } catch (ExpressionException e) {}
+    }
+
+    public void testRangesComposition() throws ExpressionException {
+        assertEquals(ATCR, Parser.parse("[a-c]*"));
+        assertEquals(ATCOXTZ, Parser.parse("[a-c]|[x-z]"));
+        assertEquals(ATCGD, Parser.parse("([a-c])d"));
     }
 }

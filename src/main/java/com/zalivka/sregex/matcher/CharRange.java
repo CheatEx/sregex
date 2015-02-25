@@ -18,7 +18,7 @@ public class CharRange extends Regex {
     }
 
     @Override public String toString() {
-        return "CharRange('"+from+", "+to+", "+positive+"')";
+        return "CharRange('"+from+"', '"+to+"', "+positive+")";
     }
 
     @Override public boolean equals(Object obj) {
