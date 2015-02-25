@@ -13,6 +13,7 @@ public class SregexSuite extends TestSuite {
         s.addTestSuite(RepetitionTest.class);
         s.addTestSuite(OptionalTest.class);
         s.addTestSuite(FewTest.class);
+        s.addTestSuite(RangeTest.class);
 
         s.addTestSuite(ComplexTest.class);
 
