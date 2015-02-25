@@ -6,6 +6,7 @@
   <packaging>jar</packaging>
   <version>0.1-SNAPSHOT</version>
   <name>sregex</name>
+  <url>https://github.com/CheatEx/sregex</url>
   <build>
     <plugins>
       <plugin>

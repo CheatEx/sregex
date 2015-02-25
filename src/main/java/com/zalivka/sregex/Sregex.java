@@ -3,23 +3,58 @@ package com.zalivka.sregex;
 import com.zalivka.sregex.matcher.Matcher;
 import com.zalivka.sregex.parser.Parser;
 
+/**
+ * Entry point for the library API.
+ */
 public final class Sregex {
-    public static Pattern compile(CharSequence re) throws ExpressionException {
-        return new Pattern(Parser.parse(re));
+    /**
+     * Parse the given expression and prepare it to be applied
+     * on input strings.
+     *
+     * @param pattern String representation of the pattern.
+     * @return Parsed pattern.
+     * @throws ExpressionException If pattern contained a syntax error.
+     */
+    public static Pattern compile(CharSequence pattern) throws ExpressionException {
+        return new Pattern(Parser.parse(pattern));
     }
 
-    public static MatchResult match(Pattern p, CharSequence str) {
-        return Matcher.match(p.r, str);
+    /**
+     * Try to match an input string against a pattern.
+     *
+     * @param pattern Compiled pattern.
+     * @param input Input string.
+     * @return Match result.
+     *
+     * @see MatchResult
+     */
+    public static MatchResult match(Pattern pattern, CharSequence input) {
+        return Matcher.match(pattern.r, input);
     }
 
-//    /**
-//     * Tries to match a string against a regular expression pattern.
-//     *
-//     * @param regex Regular expression.
-//     * @param string String to match.
-//     * @return The matched substring of {@code null} if match wasn't found.
-//     */
-    public static MatchResult match(CharSequence re, CharSequence str) throws ExpressionException {
-        return Matcher.match(Parser.parse(re), str);
+    /**
+     * Shortcut method, exactly equivalent to
+     * {@code match(compile(pattern), input)}.
+     */
+    public static MatchResult match(CharSequence pattern, CharSequence input) throws ExpressionException {
+        return match(compile(pattern), input);
     }
+
+    /**
+     * Boolean-valued shortcut method, exactly equivalent to
+     * {@code match(compile(pattern), input).success()}.
+     */
+    public static boolean matches(CharSequence pattern, CharSequence input) throws ExpressionException {
+        return match(compile(pattern), input).success();
+    }
+
+    /**
+     * Boolean-valued shortcut method, exactly equivalent to
+     * {@code match(pattern, input).success()}.
+     */
+    public static boolean matches(Pattern pattern, CharSequence input) {
+        return match(pattern, input).success();
+    }
+
+    private Sregex() {}
 }

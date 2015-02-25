@@ -4,46 +4,46 @@ import junit.framework.TestCase;
 
 public class BasicTest extends TestCase {
     public void testEmpty() throws ExpressionException {
-        assertTrue(Sregex.match("", "").success());
-        assertFalse(Sregex.match("a", "").success());
-        assertFalse(Sregex.match("a|b", "").success());
-        assertFalse(Sregex.match("ab", "").success());
+        assertTrue(Sregex.matches("", ""));
+        assertFalse(Sregex.matches("a", ""));
+        assertFalse(Sregex.matches("a|b", ""));
+        assertFalse(Sregex.matches("ab", ""));
     }
 
     public void testSimpleSequences() throws ExpressionException {
-        assertTrue(Sregex.match("a", "a").success());
-        assertFalse(Sregex.match("a", "b").success());
-        assertFalse(Sregex.match("a", "ab").success());
+        assertTrue(Sregex.matches("a", "a"));
+        assertFalse(Sregex.matches("a", "b"));
+        assertFalse(Sregex.matches("a", "ab"));
 
-        assertTrue(Sregex.match("ab", "ab").success());
-        assertFalse(Sregex.match("ab", "a").success());
-        assertFalse(Sregex.match("ab", "b").success());
-        assertFalse(Sregex.match("ab", "abc").success());
+        assertTrue(Sregex.matches("ab", "ab"));
+        assertFalse(Sregex.matches("ab", "a"));
+        assertFalse(Sregex.matches("ab", "b"));
+        assertFalse(Sregex.matches("ab", "abc"));
 
-        assertTrue(Sregex.match("abc", "abc").success());
-        assertFalse(Sregex.match("abc", "a").success());
-        assertFalse(Sregex.match("abc", "ab").success());
-        assertFalse(Sregex.match("abc", "abd").success());
-        assertFalse(Sregex.match("abc", "abcd").success());
+        assertTrue(Sregex.matches("abc", "abc"));
+        assertFalse(Sregex.matches("abc", "a"));
+        assertFalse(Sregex.matches("abc", "ab"));
+        assertFalse(Sregex.matches("abc", "abd"));
+        assertFalse(Sregex.matches("abc", "abcd"));
     }
 
     public void testSimpleAlternation() throws ExpressionException {
-        assertTrue(Sregex.match("a|b", "a").success());
-        assertTrue(Sregex.match("a|b", "b").success());
-        assertFalse(Sregex.match("a|b", "c").success());
+        assertTrue(Sregex.matches("a|b", "a"));
+        assertTrue(Sregex.matches("a|b", "b"));
+        assertFalse(Sregex.matches("a|b", "c"));
 
-        assertTrue(Sregex.match("a|b|c", "a").success());
-        assertTrue(Sregex.match("a|b|c", "b").success());
-        assertTrue(Sregex.match("a|b|c", "c").success());
-        assertFalse(Sregex.match("a|b|c", "d").success());
+        assertTrue(Sregex.matches("a|b|c", "a"));
+        assertTrue(Sregex.matches("a|b|c", "b"));
+        assertTrue(Sregex.matches("a|b|c", "c"));
+        assertFalse(Sregex.matches("a|b|c", "d"));
     }
 
     public void testExample() throws ExpressionException {
-        assertTrue(Sregex.match("((abc)*|(abcd))(d|e)", "abcabcabcd").success());
-        assertTrue(Sregex.match("((abc)*|(abcd))(d|e)", "abcabcabce").success());
+        assertTrue(Sregex.matches("((abc)*|(abcd))(d|e)", "abcabcabcd"));
+        assertTrue(Sregex.matches("((abc)*|(abcd))(d|e)", "abcabcabce"));
 
-        assertFalse(Sregex.match("((abc)*|(abcd))(d|e)", "abcabcabcdd").success());
-        assertFalse(Sregex.match("((abc)*|(abcd))(d|e)", "abcabcabcf").success());
-        assertFalse(Sregex.match("((abc)*|(abcd))(d|e)", "abcabcdabcd").success());
+        assertFalse(Sregex.matches("((abc)*|(abcd))(d|e)", "abcabcabcdd"));
+        assertFalse(Sregex.matches("((abc)*|(abcd))(d|e)", "abcabcabcf"));
+        assertFalse(Sregex.matches("((abc)*|(abcd))(d|e)", "abcabcdabcd"));
     }
 }

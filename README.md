@@ -16,29 +16,10 @@ See also the 'Supported syntax' section below.
 
 ## Supported syntax
 
-* Alternatives
-
-        a|b
-
-* Repetition
-
-        a*
-
-* Optional
-
-        b?
-
-* One ore more
-
-        c+
-
-* Groups
-
-        (ab)|(cd)
-
-* Character ranges
-
-        '[a-c]'
-        '[^x-z]'.
-
+* Alternatives. Example: `a|b`
+* Repetition. Example: `a*`
+* Optional. Example: `b?`
+* One ore more. Example: `c+`
+* Groups. Example: `(ab)|(cd)`
+* Character ranges. Example: `[a-c]`, `[^x-z]`
 * Arbitrary quantification {n,m}, {,n} {m,}
