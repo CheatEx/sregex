@@ -8,23 +8,23 @@ public class AlternativeTest extends TestCase {
         new Alternative(new Char('a'), new Alternative(new Char('b'), new Char('c')));
 
     public void testAlternative() {
-        assertTrue(Matcher.match(A_OR_B, "a").succes());
-        assertTrue(Matcher.match(A_OR_B, "b").succes());
-        assertFalse(Matcher.match(A_OR_B, "c").succes());
-        assertFalse(Matcher.match(A_OR_B, "ab").succes());
+        assertTrue(Matcher.match(A_OR_B, "a").success());
+        assertTrue(Matcher.match(A_OR_B, "b").success());
+        assertFalse(Matcher.match(A_OR_B, "c").success());
+        assertFalse(Matcher.match(A_OR_B, "ab").success());
     }
 
     public void testNestedAlternative() {
-        assertTrue(Matcher.match(A_OR_B_OR_C, "a").succes());
-        assertTrue(Matcher.match(A_OR_B_OR_C, "b").succes());
-        assertTrue(Matcher.match(A_OR_B_OR_C, "c").succes());
-        assertFalse(Matcher.match(A_OR_B, "ab").succes());
-        assertFalse(Matcher.match(A_OR_B, "d").succes());
-        assertFalse(Matcher.match(A_OR_B, "da").succes());
+        assertTrue(Matcher.match(A_OR_B_OR_C, "a").success());
+        assertTrue(Matcher.match(A_OR_B_OR_C, "b").success());
+        assertTrue(Matcher.match(A_OR_B_OR_C, "c").success());
+        assertFalse(Matcher.match(A_OR_B, "ab").success());
+        assertFalse(Matcher.match(A_OR_B, "d").success());
+        assertFalse(Matcher.match(A_OR_B, "da").success());
     }
 
     public void testEmpty() {
-        assertFalse(Matcher.match(A_OR_B, "").succes());
-        assertFalse(Matcher.match(A_OR_B_OR_C, "").succes());
+        assertFalse(Matcher.match(A_OR_B, "").success());
+        assertFalse(Matcher.match(A_OR_B_OR_C, "").success());
     }
 }

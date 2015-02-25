@@ -36,9 +36,9 @@ public class GroupTest extends TestCase {
         assertMatch(ARTICLE_EXAMPLE, "abcabcabcd", "abcabcabc", "abc", null, "d");
         assertMatch(ARTICLE_EXAMPLE, "abcabcabce", "abcabcabc", "abc", null, "e");
 
-        assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcdd").succes());
-        assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcf").succes());
-        assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcdabcd").succes());
+        assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcdd").success());
+        assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcf").success());
+        assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcdabcd").success());
     }
 
     public void testJdkR() {
@@ -52,7 +52,7 @@ public class GroupTest extends TestCase {
 
     private void assertMatch(Regex r, String str, String... groups) {
         MatchResult res = Matcher.match(r, str);
-        assertTrue(res.succes());
+        assertTrue(res.success());
         if (groups != null) {
             assertEquals("Unexpected number of groups [exp="+Arrays.toString(groups)+", res="+res.groups()+"]",
                 groups.length, res.groups().size());

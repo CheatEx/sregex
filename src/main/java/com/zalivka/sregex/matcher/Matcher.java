@@ -12,9 +12,9 @@ public final class Matcher {
      * E.g. Repetition(Char('a')) do match "aaa" but doesn't match "baaaa" and "aaaab".
      * @return Whether the string match the given pattern.
      */
-    public static MatchResult match(Regex re, String str) {
+    public static MatchResult match(Regex re, CharSequence str) {
         // TODO some nested groups?
-        if (str.isEmpty())
+        if (str.length() == 0)
             return re.empty ? new Success(Collections.emptyList()) : FAILURE;
 
         boolean succ = re.shift(str.charAt(0), true);
@@ -57,7 +57,7 @@ public final class Matcher {
             this.groups = Collections.unmodifiableList(groups);
         }
 
-        @Override public boolean succes() {
+        @Override public boolean success() {
             return true;
         }
 
@@ -67,7 +67,7 @@ public final class Matcher {
     }
 
     private static final MatchResult FAILURE = new MatchResult() {
-        @Override public boolean succes() {
+        @Override public boolean success() {
             return false;
         }
 

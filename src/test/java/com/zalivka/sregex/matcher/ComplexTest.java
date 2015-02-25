@@ -26,13 +26,13 @@ public class ComplexTest extends TestCase {
             ));
 
     public void testExample() {
-        assertTrue(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcd").succes());
-        assertTrue(Matcher.match(ARTICLE_EXAMPLE, "abcabcabce").succes());
-        assertTrue(Matcher.match(ARTICLE_EXAMPLE, "abcdd").succes());
-        assertTrue(Matcher.match(ARTICLE_EXAMPLE, "abcde").succes());
+        assertTrue(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcd").success());
+        assertTrue(Matcher.match(ARTICLE_EXAMPLE, "abcabcabce").success());
+        assertTrue(Matcher.match(ARTICLE_EXAMPLE, "abcdd").success());
+        assertTrue(Matcher.match(ARTICLE_EXAMPLE, "abcde").success());
 
-        assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcdd").succes());
-        assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcf").succes());
-        assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcdabcd").succes());
+        assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcdd").success());
+        assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcf").success());
+        assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcdabcd").success());
     }
 }

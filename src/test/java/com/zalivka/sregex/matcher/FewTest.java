@@ -8,31 +8,31 @@ public class FewTest extends TestCase {
     private static final Regex A_FB = new Sequence(new Char('a'), new Few(new Char('b')));
 
     public void testFew() {
-        assertTrue(Matcher.match(FA, "a").succes());
-        assertTrue(Matcher.match(FA, "aa").succes());
-        assertTrue(Matcher.match(FA, "aaa").succes());
+        assertTrue(Matcher.match(FA, "a").success());
+        assertTrue(Matcher.match(FA, "aa").success());
+        assertTrue(Matcher.match(FA, "aaa").success());
 
-        assertFalse(Matcher.match(FA, "b").succes());
-        assertFalse(Matcher.match(FA, "bb").succes());
+        assertFalse(Matcher.match(FA, "b").success());
+        assertFalse(Matcher.match(FA, "bb").success());
     }
 
     public void testFewInSequence() {
-        assertTrue(Matcher.match(FA_B, "ab").succes());
-        assertTrue(Matcher.match(FA_B, "aab").succes());
-        assertFalse(Matcher.match(FA_B, "a").succes());
-        assertFalse(Matcher.match(FA_B, "aa").succes());
-        assertFalse(Matcher.match(FA_B, "b").succes());
+        assertTrue(Matcher.match(FA_B, "ab").success());
+        assertTrue(Matcher.match(FA_B, "aab").success());
+        assertFalse(Matcher.match(FA_B, "a").success());
+        assertFalse(Matcher.match(FA_B, "aa").success());
+        assertFalse(Matcher.match(FA_B, "b").success());
 
-        assertTrue(Matcher.match(A_FB, "ab").succes());
-        assertTrue(Matcher.match(A_FB, "abb").succes());
-        assertFalse(Matcher.match(A_FB, "a").succes());
-        assertFalse(Matcher.match(A_FB, "ac").succes());
-        assertFalse(Matcher.match(FA_B, "b").succes());
+        assertTrue(Matcher.match(A_FB, "ab").success());
+        assertTrue(Matcher.match(A_FB, "abb").success());
+        assertFalse(Matcher.match(A_FB, "a").success());
+        assertFalse(Matcher.match(A_FB, "ac").success());
+        assertFalse(Matcher.match(FA_B, "b").success());
     }
 
     public void testEmpty() {
-        assertFalse(Matcher.match(FA, "").succes());
-        assertFalse(Matcher.match(FA_B, "").succes());
-        assertFalse(Matcher.match(A_FB, "").succes());
+        assertFalse(Matcher.match(FA, "").success());
+        assertFalse(Matcher.match(FA_B, "").success());
+        assertFalse(Matcher.match(A_FB, "").success());
     }
 }
