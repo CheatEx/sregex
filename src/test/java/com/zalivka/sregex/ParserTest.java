@@ -154,12 +154,12 @@ public class ParserTest extends TestCase {
                         new Sequence(Regex.E, new Char('c')),
                         new Sequence(Regex.E, new Char('d'))))));
 
-    public void testSimple() {
+    public void testSimple() throws ExpressionException {
         assertEquals(Regex.E, Parser.parse(""));
         assertEquals(A, Parser.parse("a"));
     }
 
-    public void testBinaries() {
+    public void testBinaries() throws ExpressionException {
         assertEquals(AB, Parser.parse("ab"));
         assertEquals(ABC, Parser.parse("abc"));
 
@@ -167,13 +167,13 @@ public class ParserTest extends TestCase {
         assertEquals(AOBOC, Parser.parse("a|b|c"));
     }
 
-    public void testUnaries() {
+    public void testUnaries() throws ExpressionException {
         assertEquals(AR, Parser.parse("a*"));
         assertEquals(AF, Parser.parse("a+"));
         assertEquals(AO, Parser.parse("a?"));
     }
 
-    public void testSimpleComposition() {
+    public void testSimpleComposition() throws ExpressionException {
         assertEquals(ABR, Parser.parse("ab*"));
         assertEquals(ARB, Parser.parse("a*b"));
         assertEquals(ABRC, Parser.parse("ab*c"));
@@ -183,7 +183,7 @@ public class ParserTest extends TestCase {
         assertEquals(AOBROC, Parser.parse("a|b*|c"));
     }
 
-    public void testRepeatedComposition() {
+    public void testRepeatedComposition() throws ExpressionException {
         assertEquals(ARBOCD, Parser.parse("a*b|cd"));
         assertEquals(ABOCDR, Parser.parse("ab|cd*"));
 
@@ -191,7 +191,7 @@ public class ParserTest extends TestCase {
         assertEquals(ABROCRDOEFR, Parser.parse("ab*|c*d|ef*"));
     }
 
-    public void testGroups() {
+    public void testGroups() throws ExpressionException {
         assertEquals(ABCGE, Parser.parse("a(bc)e"));
         assertEquals(ABOCGE, Parser.parse("a(b|c)e"));
         assertEquals(ABOCODE, Parser.parse("a(b|c|d)e"));

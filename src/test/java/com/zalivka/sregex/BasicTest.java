@@ -3,14 +3,14 @@ package com.zalivka.sregex;
 import junit.framework.TestCase;
 
 public class BasicTest extends TestCase {
-    public void testEmpty() {
+    public void testEmpty() throws ExpressionException {
         assertTrue(Sregex.match("", "").succes());
         assertFalse(Sregex.match("a", "").succes());
         assertFalse(Sregex.match("a|b", "").succes());
         assertFalse(Sregex.match("ab", "").succes());
     }
 
-    public void testSimpleSequences() {
+    public void testSimpleSequences() throws ExpressionException {
         assertTrue(Sregex.match("a", "a").succes());
         assertFalse(Sregex.match("a", "b").succes());
         assertFalse(Sregex.match("a", "ab").succes());
@@ -27,7 +27,7 @@ public class BasicTest extends TestCase {
         assertFalse(Sregex.match("abc", "abcd").succes());
     }
 
-    public void testSimpleAlternation() {
+    public void testSimpleAlternation() throws ExpressionException {
         assertTrue(Sregex.match("a|b", "a").succes());
         assertTrue(Sregex.match("a|b", "b").succes());
         assertFalse(Sregex.match("a|b", "c").succes());
@@ -38,7 +38,7 @@ public class BasicTest extends TestCase {
         assertFalse(Sregex.match("a|b|c", "d").succes());
     }
 
-    public void testExample() {
+    public void testExample() throws ExpressionException {
         assertTrue(Sregex.match("((abc)*|(abcd))(d|e)", "abcabcabcd").succes());
         assertTrue(Sregex.match("((abc)*|(abcd))(d|e)", "abcabcabce").succes());
 

@@ -14,7 +14,7 @@ public final class Sregex {
 //     * @param string String to match.
 //     * @return The matched substring of {@code null} if match wasn't found.
 //     */
-    public static MatchResult match(String re, String str) throws ExpressionException {
+    public static MatchResult match(CharSequence re, String str) throws ExpressionException {
         return Matcher.match(Parser.parse(re), str);
     }
 }

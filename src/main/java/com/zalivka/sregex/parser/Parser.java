@@ -4,12 +4,12 @@ import com.zalivka.sregex.ExpressionException;
 import com.zalivka.sregex.matcher.*;
 
 public final class Parser {
-    public static Regex parse(String in) throws ExpressionException {
+    public static Regex parse(CharSequence in) throws ExpressionException {
         Source s = new Source(in);
         return regex(s);
     }
 
-    private static Regex regex(Source s) {
+    private static Regex regex(Source s) throws ExpressionException {
         Regex term = term(s);
 
         while(s.more() && s.peek()=='|') {
@@ -21,7 +21,7 @@ public final class Parser {
         return term;
     }
 
-    private static Regex term(Source s) {
+    private static Regex term(Source s) throws ExpressionException {
         Regex factor = Regex.E;
 
         while (s.more() && s.peek() != ')' && s.peek() != '|') {
@@ -32,7 +32,7 @@ public final class Parser {
         return factor;
     }
 
-    private static Regex factor(Source s) {
+    private static Regex factor(Source s) throws ExpressionException {
         Regex base = base(s);
 
         fl: while (s.more()) {
@@ -57,7 +57,7 @@ public final class Parser {
         return base;
     }
 
-    private static Regex base(Source s) {
+    private static Regex base(Source s) throws ExpressionException {
         switch (s.peek()) {
             case '(':
                 s.drop('(');
@@ -75,10 +75,10 @@ public final class Parser {
     }
 
     private static class Source {
-        private final String input;
+        private final CharSequence input;
         private int idx;
 
-        private Source(String input) {
+        private Source(CharSequence input) {
             this.input = input;
             this.idx = 0;
         }
@@ -89,11 +89,11 @@ public final class Parser {
 
         public char pop() {
             char c = peek();
-            drop(c);
+            idx++;
             return c;
         }
 
-        public void drop(char c) {
+        public void drop(char c) throws ExpressionException {
             if (peek() == c)
                 idx++;
             else
