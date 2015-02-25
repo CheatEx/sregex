@@ -1,6 +1,6 @@
 # sregex
 
-A simple regex java library.
+A simple regex library for Java.
 
 The implementation based on the Carl Friedrich Bolz article [An Efficient and Elegant Regular Expression Matcher in Python](http://morepypy.blogspot.ru/2010/05/efficient-and-elegant-regular.html).
 
@@ -50,8 +50,15 @@ See also the 'Supported syntax' section below.
     where the first character should be lexicographically less or equal than the second.
 
 <quantifier> ::=
-    '*' | '?' | '+'
+    '*' | '?' | '+' |
+    <quantity>
+
+<quantity> ::=
+    '{' <number>? ',' <number>? '}'
 
 <char> ::=
-    '1'...'Z'
+    '0'...'Z'
+
+<number> ::=
+    '0'...'9'
 ```

@@ -25,4 +25,8 @@ public class Char extends Regex {
         Char aChar = (Char)obj;
         return val == aChar.val;
     }
+
+    @Override public Regex copy() {
+        return new Char(val);
+    }
 }

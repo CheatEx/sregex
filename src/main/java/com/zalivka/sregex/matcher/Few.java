@@ -15,4 +15,8 @@ public class Few extends Unary {
     @Override public String toString() {
         return "Few("+re.toString()+')';
     }
+
+    @Override public Regex copy() {
+        return new Few(re.copy());
+    }
 }

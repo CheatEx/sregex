@@ -16,4 +16,8 @@ public class Sequence extends Binary {
     @Override public String toString() {
         return "Sequence("+left.toString()+", "+right.toString()+')';
     }
+
+    @Override public Regex copy() {
+        return new Sequence(left.copy(), right.copy());
+    }
 }

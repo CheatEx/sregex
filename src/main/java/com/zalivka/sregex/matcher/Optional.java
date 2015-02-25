@@ -19,4 +19,8 @@ public class Optional extends Unary {
     @Override public String toString() {
         return "Optional("+re.toString()+')';
     }
+
+    @Override public Regex copy() {
+        return new Optional(re.copy());
+    }
 }

@@ -15,4 +15,8 @@ public class Repetition extends Unary {
     @Override public String toString() {
         return "Repetition("+re.toString()+')';
     }
+
+    @Override public Regex copy() {
+        return new Repetition(re.copy());
+    }
 }

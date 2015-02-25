@@ -14,4 +14,8 @@ public class Alternative extends Binary {
     @Override public String toString() {
         return "Alternative("+left.toString()+", "+right.toString()+")";
     }
+
+    @Override public Regex copy() {
+        return new Alternative(left.copy(), right.copy());
+    }
 }

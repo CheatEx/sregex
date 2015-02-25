@@ -48,4 +48,8 @@ public class Group extends Unary {
     @Override public String toString() {
         return "Group("+re.toString()+')';
     }
+
+    @Override public Regex copy() {
+        return new Group(re.copy());
+    }
 }

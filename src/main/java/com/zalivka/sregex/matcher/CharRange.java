@@ -30,4 +30,8 @@ public class CharRange extends Regex {
         CharRange range = (CharRange)obj;
         return from==range.from && to==range.to && positive ==range.positive;
     }
+
+    @Override public Regex copy() {
+        return new CharRange(from, to, positive);
+    }
 }
