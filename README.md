@@ -24,7 +24,7 @@ See also the 'Supported syntax' section below.
 * One ore more. Example: `c+`
 * Groups. Example: `(ab)|(cd)`
 * Character ranges. Example: `[a-c]`, `[^x-z]`
-* Arbitrary quantification {n,m}, {,n} {m,}
+* Arbitrary quantification. Example `a{3,4}`, `(a|b){,5}`, `(qwe){2,}`
 
 ### Specification
 
