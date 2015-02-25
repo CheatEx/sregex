@@ -4,17 +4,8 @@ import junit.framework.TestCase;
 
 public class QuantifiedTest extends TestCase {
     private static final Regex A23 = new Quantified(new Char('a'), 2, 3);
-//    private static final Regex AU3 = new Quantified(new Char('a'), 0, 3);
+    private static final Regex AU3 = new Quantified(new Char('a'), 0, 3);
     private static final Regex A2U = new Quantified(new Char('a'), 2, Quantified.UNBOUNDED);
-
-    private static final Regex AU3 =
-//        new Sequence(
-//            Regex.E,
-            new Sequence(
-                new Optional(new Char('a')),
-                new Sequence(
-                    new Optional(new Char('a')),
-                    new Optional(new Char('a'))));
 
     public void testSimple() {
         assertTrue(Matcher.match(A23, "aa").success());
