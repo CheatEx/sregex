@@ -1,6 +1,7 @@
 package com.zalivka.sregex;
 
 import com.zalivka.sregex.matcher.*;
+import com.zalivka.sregex.parser.ParserTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
