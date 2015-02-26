@@ -8,7 +8,7 @@ The implementation based on the Carl Friedrich Bolz article [An Efficient and El
 
 Performs full string match. It means that pattern 'abc*' matches strings 'ab' and 'abccc', but doesn't match 'zab' and 'abcd'. See also the 'Supported syntax' section below.
 
-Match itself doesn't support the following:
+Inside the supported syntax the following limitations are known:
 
 1. Quantification (the `{x,y}` syntax) supports only single digit numbers. I.e `{2,3}` is correct, while `{11,12}` would cause an exception in pattern compilation.
 
