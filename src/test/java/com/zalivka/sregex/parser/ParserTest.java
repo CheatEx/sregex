@@ -179,6 +179,31 @@ public class ParserTest extends TestCase {
                     new Sequence(Regex.E, new CharRange('a', 'c', true)))),
             new Char('d'));
 
+    private static final Regex A23 =
+        new Sequence(
+            Regex.E,
+            new Quantified(2, 3, new Char('a')));
+    private static final Regex A2 =
+        new Sequence(
+            Regex.E,
+            new Quantified(2, Quantified.UNBOUNDED, new Char('a')));
+    private static final Regex A03 =
+        new Sequence(
+            Regex.E,
+            new Quantified(0, 3, new Char('a')));
+    private static final Regex A23OB45 =
+        new Alternative(
+            new Sequence(
+                Regex.E,
+                new Quantified(2, 3, new Char('a'))),
+            new Sequence(
+                Regex.E,
+                new Quantified(4, 5, new Char('b'))));
+    private static final Regex AB23 =
+        new Sequence(
+            new Sequence(Regex.E, new Char('a')),
+            new Quantified(2, 3, new Char('b')));
+
     public void testSimple() throws ExpressionException {
         assertEquals(Regex.E, Parser.parse(""));
         assertEquals(A, Parser.parse("a"));
@@ -255,5 +280,14 @@ public class ParserTest extends TestCase {
         assertEquals(ATCR, Parser.parse("[a-c]*"));
         assertEquals(ATCOXTZ, Parser.parse("[a-c]|[x-z]"));
         assertEquals(ATCGD, Parser.parse("([a-c])d"));
+    }
+
+    public void testQuantity() throws ExpressionException {
+        assertEquals(A23, Parser.parse("a{2,3}"));
+        assertEquals(A2, Parser.parse("a{2,}"));
+        assertEquals(A03, Parser.parse("a{,3}"));
+
+        assertEquals(A23OB45, Parser.parse("a{2,3}|b{4,5}"));
+        assertEquals(AB23, Parser.parse("ab{2,3}"));
     }
 }

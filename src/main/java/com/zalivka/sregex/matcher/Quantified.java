@@ -7,7 +7,7 @@ public class Quantified extends Unary {
     private final int upper;
     private final Regex target;
 
-    public Quantified(Regex re, int lower, int upper) {
+    public Quantified(int lower, int upper, Regex re) {
         super(lower==0, buildWrapper(lower, upper, re));
         target = re;
         this.lower = lower;
@@ -19,11 +19,13 @@ public class Quantified extends Unary {
     }
 
     @Override public String toString() {
-        return "Quantified("+lower+", "+upper+", "+target+")";
+        return "Quantified("+lower+", "+
+            (upper==UNBOUNDED ? "U": upper) +
+            ", "+target+")";
     }
 
     @Override public Regex copy() {
-        return new Quantified(target, lower, upper);
+        return new Quantified(lower, upper, target);
     }
 
     private static Regex buildWrapper(int lower, int upper, Regex re) {

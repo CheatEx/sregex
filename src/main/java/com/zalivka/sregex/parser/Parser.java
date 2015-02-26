@@ -49,6 +49,9 @@ public final class Parser {
                     s.drop('+');
                     base = new Few(base);
                     break;
+                case '{':
+                    base = quantity(s, base);
+                    break;
                 default:
                     break fl;
             }
@@ -73,6 +76,32 @@ public final class Parser {
                 else
                     throw new ExpressionException("Unsupported character :"+c);
         }
+    }
+
+    private static Regex quantity(Source s, Regex base) throws ExpressionException {
+        s.drop('{');
+
+        int lower;
+        char lowerC = s.peek();
+        if (Character.isDigit(lowerC)) {
+            lower = lowerC-'0';
+            s.drop(lowerC);
+        } else
+            lower = 0;
+
+        s.drop(',');
+
+        int upper;
+        char upperC = s.peek();
+        if (Character.isDigit(upperC)) {
+            upper = upperC - '0';
+            s.drop(upperC);
+        } else
+            upper = Quantified.UNBOUNDED;
+
+        s.drop('}');
+
+        return new Quantified(lower, upper, base);
     }
 
     private static Regex range(Source s) throws ExpressionException {

@@ -2,48 +2,72 @@ package com.zalivka.sregex;
 
 import junit.framework.TestCase;
 
+import java.util.Arrays;
+
 public class BasicTest extends TestCase {
     public void testEmpty() throws ExpressionException {
-        assertTrue(Sregex.matches("", ""));
-        assertFalse(Sregex.matches("a", ""));
-        assertFalse(Sregex.matches("a|b", ""));
-        assertFalse(Sregex.matches("ab", ""));
+        assertMatches("", "");
+        assertNotMatches("a", "");
+        assertNotMatches("a|b", "");
+        assertNotMatches("ab", "");
     }
 
     public void testSimpleSequences() throws ExpressionException {
-        assertTrue(Sregex.matches("a", "a"));
-        assertFalse(Sregex.matches("a", "b"));
-        assertFalse(Sregex.matches("a", "ab"));
+        assertMatches("a", "a");
+        assertNotMatches("a", "b");
+        assertNotMatches("a", "ab");
 
-        assertTrue(Sregex.matches("ab", "ab"));
-        assertFalse(Sregex.matches("ab", "a"));
-        assertFalse(Sregex.matches("ab", "b"));
-        assertFalse(Sregex.matches("ab", "abc"));
+        assertMatches("ab", "ab");
+        assertNotMatches("ab", "a");
+        assertNotMatches("ab", "b");
+        assertNotMatches("ab", "abc");
 
-        assertTrue(Sregex.matches("abc", "abc"));
-        assertFalse(Sregex.matches("abc", "a"));
-        assertFalse(Sregex.matches("abc", "ab"));
-        assertFalse(Sregex.matches("abc", "abd"));
-        assertFalse(Sregex.matches("abc", "abcd"));
+        assertMatches("abc", "abc");
+        assertNotMatches("abc", "a");
+        assertNotMatches("abc", "ab");
+        assertNotMatches("abc", "abd");
+        assertNotMatches("abc", "abcd");
     }
 
     public void testSimpleAlternation() throws ExpressionException {
-        assertTrue(Sregex.matches("a|b", "a"));
-        assertTrue(Sregex.matches("a|b", "b"));
-        assertFalse(Sregex.matches("a|b", "c"));
+        assertMatches("a|b", "a");
+        assertMatches("a|b", "b");
+        assertNotMatches("a|b", "c");
 
-        assertTrue(Sregex.matches("a|b|c", "a"));
-        assertTrue(Sregex.matches("a|b|c", "b"));
-        assertTrue(Sregex.matches("a|b|c", "c"));
-        assertFalse(Sregex.matches("a|b|c", "d"));
+        assertMatches("a|b|c", "a");
+        assertMatches("a|b|c", "b");
+        assertMatches("a|b|c", "c");
+        assertNotMatches("a|b|c", "d");
     }
 
     public void testExample() throws ExpressionException {
-        assertTrue(Sregex.matches("((abc)*|(abcd))(d|e)", "abcabcabcd"));
-        assertTrue(Sregex.matches("((abc)*|(abcd))(d|e)", "abcabcabce"));
+        assertMatches("((abc)*|(abcd))(d|e)", "abcabcabcd",
+            "abcabcabc", "abc", null, "d");
+        assertMatches("((abc)*|(abcd))(d|e)", "abcabcabce",
+            "abcabcabc", "abc", null, "e");
+        assertMatches("((abc)*|(abcd))(d|e)", "abcde",
+            "abcd", null, "abcd", "e");
 
-        assertFalse(Sregex.matches("((abc)*|(abcd))(d|e)", "abcabcabcdd"));
-        assertFalse(Sregex.matches("((abc)*|(abcd))(d|e)", "abcabcabcf"));
-        assertFalse(Sregex.matches("((abc)*|(abcd))(d|e)", "abcabcdabcd"));
+        assertNotMatches("((abc)*|(abcd))(d|e)", "abcabcabcdd");
+        assertNotMatches("((abc)*|(abcd))(d|e)", "abcabcabcf");
+        assertNotMatches("((abc)*|(abcd))(d|e)", "abcabcdabcd");
+    }
+
+    private void assertNotMatches(String pattern, String str) throws ExpressionException {
+        MatchResult res = Sregex.match(pattern, str);
+        assertFalse(res.success());
+    }
+
+    private void assertMatches(String pattern, String str, String... groups) throws ExpressionException {
+        MatchResult res = Sregex.match(pattern, str);
+        assertTrue(res.success());
+        if (groups != null) {
+            assertEquals("Unexpected number of groups [exp="+Arrays.toString(groups)+", res="+res.groups()+"]",
+                groups.length, res.groups().size());
+            for (int i=0; i<groups.length; i++) {
+                assertEquals("Mismatch in group:"+i, groups[i], res.groups().get(i));
+            }
+        } else
+            assertTrue(res.groups().isEmpty());
     }
 }

@@ -4,10 +4,11 @@ import com.zalivka.sregex.MatchResult;
 import junit.framework.TestCase;
 
 import java.util.Arrays;
-import java.util.regex.Pattern;
 
 public class GroupTest extends TestCase {
-    /// ((abc)*|(abcd))(d|e)
+    /**
+     * ((abc)*|(abcd))(d|e)
+     */
     private final Regex ARTICLE_EXAMPLE =
         new Sequence(
             new Group(
@@ -39,15 +40,6 @@ public class GroupTest extends TestCase {
         assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcdd").success());
         assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcabcf").success());
         assertFalse(Matcher.match(ARTICLE_EXAMPLE, "abcabcdabcd").success());
-    }
-
-    public void testJdkR() {
-        Pattern p = Pattern.compile("((abc)*|(abcd))((d|e))");
-        java.util.regex.Matcher m = p.matcher("abcabcabcd");
-        assertTrue(m.matches());
-        for (int i=0; i<m.groupCount(); i++) {
-            System.out.println("Group "+i+" = "+m.group(i));
-        }
     }
 
     private void assertMatch(Regex r, String str, String... groups) {

@@ -3,9 +3,13 @@ package com.zalivka.sregex.matcher;
 import junit.framework.TestCase;
 
 public class QuantifiedTest extends TestCase {
-    private static final Regex A23 = new Quantified(new Char('a'), 2, 3);
-    private static final Regex AU3 = new Quantified(new Char('a'), 0, 3);
-    private static final Regex A2U = new Quantified(new Char('a'), 2, Quantified.UNBOUNDED);
+    private static final Regex A23 = new Quantified(2, 3, new Char('a'));
+    private static final Regex AU3 = new Quantified(0, 3, new Char('a'));
+    private static final Regex A2U = new Quantified(2, Quantified.UNBOUNDED, new Char('a'));
+    private static final Regex AB23 = new Quantified(2, 3,
+        new Sequence(new Char('a'), new Char('b')));
+    private static final Regex AOB23 = new Quantified(2, 3,
+        new Alternative(new Char('a'), new Char('b')));
 
     public void testSimple() {
         assertTrue(Matcher.match(A23, "aa").success());
@@ -28,5 +32,16 @@ public class QuantifiedTest extends TestCase {
         assertTrue(Matcher.match(A2U, "aa").success());
         assertTrue(Matcher.match(A2U, "aaa").success());
         assertTrue(Matcher.match(A2U, "aaaaa").success());
+    }
+
+    public void testSubexpressions() {
+        assertTrue(Matcher.match(AB23, "ababab").success());
+        assertTrue(Matcher.match(AB23, "abab").success());
+        assertFalse(Matcher.match(AB23, "ab").success());
+
+        assertTrue(Matcher.match(AOB23, "aba").success());
+        assertTrue(Matcher.match(AOB23, "aa").success());
+        assertTrue(Matcher.match(AOB23, "bb").success());
+        assertFalse(Matcher.match(AOB23, "abc").success());
     }
 }

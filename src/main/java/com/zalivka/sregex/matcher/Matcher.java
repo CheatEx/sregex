@@ -13,7 +13,6 @@ public final class Matcher {
      * @return Whether the string match the given pattern.
      */
     public static MatchResult match(Regex re, CharSequence str) {
-        // TODO some nested groups?
         if (str.length() == 0)
             return re.empty ? new Success(Collections.emptyList()) : FAILURE;
 
