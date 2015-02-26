@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 
 import java.util.Arrays;
 
-public class BasicTest extends TestCase {
+public class ApiTest extends TestCase {
     public void testEmpty() throws ExpressionException {
         assertMatches("", "");
         assertNotMatches("a", "");
@@ -40,13 +40,13 @@ public class BasicTest extends TestCase {
         assertNotMatches("a|b|c", "d");
     }
 
-    public void testExample() throws ExpressionException {
+    public void testArticleExample() throws ExpressionException {
         assertMatches("((abc)*|(abcd))(d|e)", "abcabcabcd",
             "abcabcabc", "abc", null, "d");
         assertMatches("((abc)*|(abcd))(d|e)", "abcabcabce",
             "abcabcabc", "abc", null, "e");
         assertMatches("((abc)*|(abcd))(d|e)", "abcde",
-            "abcd", null, "abcd", "e");
+            "abcd", "abc", "abcd", "e");
 
         assertNotMatches("((abc)*|(abcd))(d|e)", "abcabcabcdd");
         assertNotMatches("((abc)*|(abcd))(d|e)", "abcabcabcf");

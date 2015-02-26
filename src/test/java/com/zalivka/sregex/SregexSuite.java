@@ -15,12 +15,15 @@ public class SregexSuite extends TestSuite {
         s.addTestSuite(OptionalTest.class);
         s.addTestSuite(FewTest.class);
         s.addTestSuite(RangeTest.class);
+        s.addTestSuite(QuantifiedTest.class);
 
         s.addTestSuite(ComplexTest.class);
 
         s.addTestSuite(ParserTest.class);
 
-        s.addTestSuite(BasicTest.class);
+        s.addTestSuite(ApiTest.class);
+
+        s.addTestSuite(ExamplesTest.class);
 
         return s;
     }
