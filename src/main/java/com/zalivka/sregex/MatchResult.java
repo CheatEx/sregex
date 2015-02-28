@@ -14,8 +14,8 @@ public interface MatchResult {
     /**
      * List of matched groups. Groups are numbered by their opening parenthesis
      * from left to right, see README for more details and examples.
-     * Depending on the original pattern result could be empty even if match was successful
-     * and result is guaranteed to be empty if match failed.
+     * Depending on the original pattern the result could be empty even if the match
+     * was successful and the result is guaranteed to be empty if the match failed.
      *
      * @return An immutable list of matched groups.
      */

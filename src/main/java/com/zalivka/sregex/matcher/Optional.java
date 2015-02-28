@@ -1,8 +1,5 @@
 package com.zalivka.sregex.matcher;
 
-/**
- * Zero or one repetitions of the sub-expression.
- */
 public class Optional extends Unary {
     private final Regex target;
 
@@ -13,7 +10,7 @@ public class Optional extends Unary {
 
     @SuppressWarnings("SimplifiableIfStatement")
     @Override protected boolean doShift(char c, boolean mark) {
-        return re.shift(c, mark);
+        return child.shift(c, mark);
     }
 
     @Override public String toString() {
@@ -21,7 +18,7 @@ public class Optional extends Unary {
     }
 
     @Override public Regex copy() {
-        return new Optional(re.copy());
+        return new Optional(child.copy());
     }
 
     private static Regex wrapper(Regex re) {

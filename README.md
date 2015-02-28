@@ -97,3 +97,7 @@ Inside the supported syntax the following limitations are known:
 <number> ::=
     '0'...'9'
 ```
+
+## Development notes
+
+Quick export: `$ zip -r sregex.zip sregex -x \*.iml -x *.git* -x *.idea*`

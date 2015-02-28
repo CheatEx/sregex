@@ -15,7 +15,7 @@ public class Quantified extends Unary {
     }
 
     @Override protected boolean doShift(char c, boolean mark) {
-        return re.shift(c, mark);
+        return child.shift(c, mark);
     }
 
     @Override public String toString() {
@@ -28,6 +28,13 @@ public class Quantified extends Unary {
         return new Quantified(lower, upper, target);
     }
 
+    /**
+     * Compiles quantified expression into compositions of simpler expressions.
+     * The idea - given quantification X{lower, upper} it could be represented as
+     * X[lower times]X?[upper-lower times].<br/>
+     * This approach doesn't work well with the current match groups implementation,
+     * so putting groups inside quantifications isn't supported.
+     */
     private static Regex buildWrapper(int lower, int upper, Regex re) {
         return new Sequence(lower(lower, re), upper(lower, upper, re));
     }

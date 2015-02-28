@@ -1,9 +1,5 @@
 package com.zalivka.sregex.matcher;
 
-/**
- * Base class for all expressions.
- * Defines both syntax [sub]tree of a regular expression and the matching algorithm.
- */
 public abstract class Regex {
     /**
      * The empty regex.
@@ -33,7 +29,7 @@ public abstract class Regex {
     public final boolean empty;
 
     /**
-     * Whether this expression matched the input seen so far.
+     * Whether this expression matched the input seen since last {@code mark} signal.
      */
     private boolean marked = false;
 
@@ -62,8 +58,5 @@ public abstract class Regex {
 
     protected abstract boolean doShift(char c, boolean mark);
 
-    /**
-     * Needed for quantified.
-     */
     public abstract Regex copy();
 }

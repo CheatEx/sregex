@@ -29,7 +29,7 @@ public final class Sregex {
      * @see MatchResult
      */
     public static MatchResult match(Pattern pattern, CharSequence input) {
-        return Matcher.match(pattern.r, input);
+        return Matcher.match(pattern.tree, input);
     }
 
     /**

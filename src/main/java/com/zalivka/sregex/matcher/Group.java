@@ -6,7 +6,7 @@ public class Group extends Unary {
     private @Nullable String match;
     /**
      * This attribute encodes state of the group match,
-     * when non-{@code null} nested expression match is in progress.
+     * when non-{@code null} the nested expression's match is in progress.
      */
     private @Nullable StringBuilder matchBuf;
 
@@ -15,15 +15,14 @@ public class Group extends Unary {
     }
 
     /**
-     * From the algorithm perspective this class is only forwarding calls
-     * to the underlying expression.
-     * To remember the match group shall record every char between
-     * {@code true} going down the expression tree in the {@code mark} argument
-     * and {@code true} going up in the method's result.
-     * If multiple {@code true} go up - match keeps growing.
+     * From the algorithm perspective this class is totally transparent.<br/>
+     * Group shall record every char between {@code true} going down the expression tree
+     * in the {@code mark} argument and {@code true} going up in the method's result.
+     * That char sequence is the the match.
+     * If multiple {@code true}s go up - match keeps growing.
      */
     @Override protected boolean doShift(char c, boolean mark) {
-        boolean reMarked = re.shift(c, mark);
+        boolean reMarked = child.shift(c, mark);
 
         if (mark)
             matchBuf = new StringBuilder();
@@ -46,10 +45,10 @@ public class Group extends Unary {
     }
 
     @Override public String toString() {
-        return "Group("+re.toString()+')';
+        return "Group("+child.toString()+')';
     }
 
     @Override public Regex copy() {
-        return new Group(re.copy());
+        return new Group(child.copy());
     }
 }

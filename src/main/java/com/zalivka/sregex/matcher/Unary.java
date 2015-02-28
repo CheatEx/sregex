@@ -1,16 +1,16 @@
 package com.zalivka.sregex.matcher;
 
 public abstract class Unary extends Regex {
-    public final Regex re;
+    public final Regex child;
 
-    protected Unary(boolean empty, Regex re) {
+    protected Unary(boolean empty, Regex child) {
         super(empty);
-        this.re = re;
+        this.child = child;
     }
 
     @Override public void reset() {
         super.reset();
-        re.reset();
+        child.reset();
     }
 
     @Override public boolean equals(Object obj) {
@@ -20,7 +20,7 @@ public abstract class Unary extends Regex {
             return false;
 
         Unary unary = (Unary)obj;
-        return re.equals(unary.re);
+        return child.equals(unary.child);
 
     }
 }

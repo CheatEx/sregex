@@ -7,11 +7,6 @@ import java.util.Collections;
 import java.util.List;
 
 public final class Matcher {
-    /**
-     * Performs full string matching.
-     * E.g. Repetition(Char('a')) do match "aaa" but doesn't match "baaaa" and "aaaab".
-     * @return Whether the string match the given pattern.
-     */
     public static MatchResult match(Regex re, CharSequence str) {
         if (str.length() == 0)
             return re.empty ? new Success(Collections.emptyList()) : FAILURE;
@@ -38,10 +33,10 @@ public final class Matcher {
         if (branch instanceof Group) {
             Group g = (Group)branch;
             groups.add(g.match());
-            walk(g.re, groups);
+            walk(g.child, groups);
         } else if (branch instanceof Unary) {
             Unary u = (Unary)branch;
-            walk(u.re, groups);
+            walk(u.child, groups);
         } else if (branch instanceof Binary) {
             Binary b = (Binary)branch;
             walk(b.left, groups);
