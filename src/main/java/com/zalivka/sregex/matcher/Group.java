@@ -4,7 +4,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class Group extends Unary {
     private @Nullable String match;
-    /**
+    /*
      * This attribute encodes state of the group match,
      * when non-{@code null} the nested expression's match is in progress.
      */
@@ -14,7 +14,7 @@ public class Group extends Unary {
         super(re.empty, re);
     }
 
-    /**
+    /*
      * From the algorithm perspective this class is totally transparent.<br/>
      * Group shall record every char between {@code true} going down the expression tree
      * in the {@code mark} argument and {@code true} going up in the method's result.

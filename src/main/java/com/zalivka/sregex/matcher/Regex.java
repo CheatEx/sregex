@@ -1,7 +1,7 @@
 package com.zalivka.sregex.matcher;
 
 public abstract class Regex {
-    /**
+    /*
      * The empty regex.
      * Implemented as a singleton instance as it doesn't maintain any state.
      */
@@ -23,12 +23,12 @@ public abstract class Regex {
         }
     };
 
-    /**
+    /*
      * Whether this expression could match an empty string.
      */
     public final boolean empty;
 
-    /**
+    /*
      * Whether this expression matched the input seen since last {@code mark} signal.
      */
     private boolean marked = false;
@@ -45,11 +45,10 @@ public abstract class Regex {
         marked = false;
     }
 
-    /**
+    /*
      * Pushes a character through [sub]expression represented by this object.
-     * @param c Next character in matched sequence.
-     * @param mark Whether attempt to match should be made.
-     * @return Whether this character has finished the current match of the expression.
+     * `mark` param indicates whether an attempt to match should be made.
+     * Returns Whether this character has finished the current match of the expression.
      */
     public boolean shift(char c, boolean mark) {
         marked = doShift(c, mark);

@@ -28,7 +28,7 @@ public class Quantified extends Unary {
         return new Quantified(lower, upper, target);
     }
 
-    /**
+    /*
      * Compiles quantified expression into compositions of simpler expressions.
      * The idea - given quantification X{lower, upper} it could be represented as
      * X[lower times]X?[upper-lower times].<br/>
